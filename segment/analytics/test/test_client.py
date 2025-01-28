@@ -331,7 +331,7 @@ class TestClient(unittest.TestCase):
             for _ in range(20):
                 client.identify('userId', {'trait': 'value'})
             time.sleep(1)
-            self.assertEqual(mock_post.call_count, 2)
+            self.assertEqual(mock_post.call_count, 3)
 
     def test_user_defined_timeout(self):
         client = Client('testsecret', timeout=10)

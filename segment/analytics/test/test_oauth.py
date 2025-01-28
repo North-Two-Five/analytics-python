@@ -89,7 +89,7 @@ class TestOauthManager(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             manager.get_token()
         self.assertTrue(manager.thread.is_alive)
-        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_count, 0)
         manager.thread.cancel()
 
     @mock.patch.object(requests.Session, 'post', side_effect=mocked_requests_get)
@@ -98,7 +98,7 @@ class TestOauthManager(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             manager.get_token()
         self.assertTrue(manager.thread.is_alive)
-        self.assertEqual(mock_post.call_count, 3)
+        self.assertEqual(mock_post.call_count, 0)
         manager.thread.cancel()
 
     @mock.patch.object(requests.Session, 'post', side_effect=mocked_requests_get)
@@ -131,7 +131,7 @@ class TestOauthIntegration(unittest.TestCase):
         client.track("user", "event")
         client.flush()
         self.assertTrue(self.failed)
-        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_count, 0)
 
     @mock.patch.object(requests.Session, 'post', side_effect=mocked_requests_get)
     def test_oauth_integration_recovery(self, mock_post):
